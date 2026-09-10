@@ -8,10 +8,10 @@ local has_mcl_mobs = minetest.get_modpath("mcl_mobs") ~= nil
 -- Settings
 -- -----------------------------------------------------------------------------
 
-local health_var = tonumber(minetest.settings:get("randomized_humanoids_health_var")) or 30
-local damage_var = tonumber(minetest.settings:get("randomized_humanoids_damage_var")) or 25
-local velocity_var = tonumber(minetest.settings:get("randomized_humanoids_velocity_var")) or 15
-local knockback_var = tonumber(minetest.settings:get("randomized_humanoids_knockback_var")) or 20
+local health_var = tonumber(minetest.settings:get("mobs_npc_mini_health_var")) or 30
+local damage_var = tonumber(minetest.settings:get("mobs_npc_mini_damage_var")) or 25
+local velocity_var = tonumber(minetest.settings:get("mobs_npc_mini_velocity_var")) or 15
+local knockback_var = tonumber(minetest.settings:get("mobs_npc_mini_knockback_var")) or 20
 
 -- -----------------------------------------------------------------------------
 -- Helpers
@@ -176,7 +176,7 @@ end
 local valid_chars = 0
 for k,v in pairs(discovered_characters) do valid_chars = valid_chars + 1 end
 
-minetest.log("action", "[randomized_humanoids] Discovered " .. valid_chars .. " valid character sets")
+minetest.log("action", "[mobs_npc_mini] Discovered " .. valid_chars .. " valid character sets")
 
 -- -----------------------------------------------------------------------------
 -- Registration Wrapper
