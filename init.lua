@@ -157,11 +157,25 @@ end
 
 local discovered_characters = {}
 local models = get_files_recursive(modpath .. "/models")
+local textures_files = get_files_recursive(modpath .. "/textures")
 
 for _, mod_path in ipairs(models) do
     local fn = mod_path:match("([^/]+)$")
-    if fn and fn:match("%.gltf$") then
-        local char_name = fn:match("^(.*)%.gltf$")
+    if fn and (fn:match("%.glb$") or fn:match("%.b3d$") or fn:match("%.obj$") or fn:match("%.gltf$")) then
+        local char_name = fn:match("^(.*)%.[a-zA-Z0-9]+$")
+
+        -- Find specific character textures or variants
+        local char_textures = {}
+        for _, tex_path in ipairs(textures_files) do
+            local tex_fn = tex_path:match("([^/]+)$")
+            if tex_fn and (tex_fn == char_name .. ".png" or tex_fn:match("^" .. char_name .. "_.*%.png$")) then
+                table.insert(char_textures, tex_fn)
+            end
+        end
+
+        if #char_textures == 0 then
+            table.insert(char_textures, "colormap.png")
+        end
 
         local inv_icon = "inv_" .. char_name .. ".png"
         local addegg = 0
@@ -171,18 +185,18 @@ for _, mod_path in ipairs(models) do
         if file then
             file:close()
         else
-            minetest.log("warning", "[mobs_npc_mini] Inventory icon not found for " .. char_name .. ", falling back to colormap.png")
-            inv_icon = "colormap.png"
+            minetest.log("warning", "[mobs_npc_mini] Inventory icon not found for " .. char_name .. ", falling back to the first available texture")
+            inv_icon = char_textures[1]
             addegg = 1
         end
 
         discovered_characters[char_name] = {
             model = fn,
-            textures = {"colormap.png"},
+            textures = char_textures,
             inv_icon = inv_icon,
             addegg = addegg,
-            is_glb = true,
-            is_gltf = true
+            is_glb = (fn:match("%.glb$") ~= nil),
+            is_gltf = (fn:match("%.gltf$") ~= nil)
         }
     end
 end
