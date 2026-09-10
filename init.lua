@@ -218,9 +218,9 @@ local function register_mob(char_name, data)
     def.type = "monster"
     def.hp_max = 20
     def.health_max = 20
-    def.collisionbox = {-0.3, 0.0, -0.3, 0.3, 1.7, 0.3}
+    def.collisionbox = {-0.9, 0.0, -0.9, 0.9, 5.1, 0.9}
     def.visual = "mesh"
-    def.visual_size = {x = 6.5, y = 6.5, z = 6.5}
+    def.visual_size = {x = 19.5, y = 19.5, z = 19.5}
     def.mesh = data.model
     def.textures = {data.textures[1]}
 
