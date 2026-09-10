@@ -163,10 +163,24 @@ for _, mod_path in ipairs(models) do
     if fn and fn:match("%.gltf$") then
         local char_name = fn:match("^(.*)%.gltf$")
 
+        local inv_icon = "inv_" .. char_name .. ".png"
+        local addegg = 0
+
+        local inv_icon_path = modpath .. "/textures/" .. inv_icon
+        local file = io.open(inv_icon_path, "r")
+        if file then
+            file:close()
+        else
+            minetest.log("warning", "[mobs_npc_mini] Inventory icon not found for " .. char_name .. ", falling back to colormap.png")
+            inv_icon = "colormap.png"
+            addegg = 1
+        end
+
         discovered_characters[char_name] = {
             model = fn,
             textures = {"colormap.png"},
-            inv_icon = "colormap.png", -- fallback icon since we don't have inv icons
+            inv_icon = inv_icon,
+            addegg = addegg,
             is_glb = true,
             is_gltf = true
         }
@@ -283,7 +297,7 @@ local function register_mob(char_name, data)
         mcl_mobs.register_mob(mob_name, mcl_def)
 
         if data.inv_icon then
-            mcl_mobs.register_egg(mob_name, char_name .. " Spawn Egg", data.inv_icon, 0)
+            mcl_mobs.register_egg(mob_name, char_name .. " Spawn Egg", data.inv_icon, data.addegg or 0)
         end
         mcl_mobs.register_spawn(mob_name, {"group:stone", "group:dirt", "group:soil", "group:sand", "group:crumbly", "group:cracky"}, 7, 0, 7000, 1, 31000)
     end
@@ -312,7 +326,7 @@ local function register_mob(char_name, data)
         mobs:register_mob(mob_name, redo_def)
 
         if data.inv_icon then
-            mobs:register_egg(mob_name, char_name .. " Spawn Egg", data.inv_icon, 0)
+            mobs:register_egg(mob_name, char_name .. " Spawn Egg", data.inv_icon, data.addegg or 0)
         end
         mobs:register_spawn(mob_name, {"group:stone", "group:dirt", "group:soil", "group:sand", "group:crumbly", "group:cracky"}, 7, 0, 7000, 1, 31000)
     end
