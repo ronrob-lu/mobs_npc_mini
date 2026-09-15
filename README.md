@@ -1,7 +1,7 @@
 # Mobs NPC Mini
 
 > [!NOTE]
-> we still dont know whar it is for but its funny to play already
+> we still dont know,  what it is for but its funny to play already.
 
 This is a Luanti (formerly Minetest) mod that adds randomized attribute variation to humanoid monster-type mobs.
 A critical aspect of this mod is its dual-game compatibility across the Minetest Game (MTG) ecosystem (using `mobs_redo`) and Mineclonia (using `mcl_mobs`). Since both games run on the single Luanti engine, they share the same rendering pipeline and logic underneath.
