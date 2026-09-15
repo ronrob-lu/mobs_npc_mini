@@ -262,11 +262,11 @@ local function register_mob(char_name, data)
 
     if data.is_glb then
         -- Baked continous timeline extracted from the node script processing the master glb
-        local stand_s, stand_e = 0 + 0.05, 1.3333333730697632 - 0.05
-        local walk_s, walk_e = 1.3833333730697632 + 0.05, 2.0500000596046446 - 0.05
-        local run_s, run_e = 2.100000059604645 + 0.05, 2.600000059604645 - 0.05
-        local die_s, die_e = 2.650000059604645 + 0.05, 2.983333402872086 - 0.05
-        local attack_s, attack_e = 3.0333334028720857 + 0.05, 3.450000059604645 - 0.05
+        local stand_s, stand_e = 0 + 0.05, 1.33 - 0.05
+        local walk_s, walk_e = 1.33 + 0.05, 2.0 - 0.05
+        local run_s, run_e = 2.0 + 0.05, 2.5 - 0.05
+        local die_s, die_e = 2.5 + 0.05, 2.83 - 0.05
+        local attack_s, attack_e = 2.83 + 0.05, 3.25 - 0.05
 
         def.animation = {
             speed_normal = 1, speed_run = 1,
